@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="查看系统支持的 shell 与默认的 shell1234docker run -it centos bashdocker ps -adocker start b4809e7f9e71docker exec -it b4809e7f9e71 bash  查看当前系统支持的 shell cat &#x2F;etc&#x2F;shells 1234&#x2F;bin&#x2F;sh&#x2F;bin&#x2F;bash&#x2F;usr&#x2F;bin&#x2F;sh&#x2F;usr&#x2F;bin&#x2F;ba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bash Shell 学习笔记">
+<meta property="og:url" content="http://example.com/bash-shell-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Thank IT">
+<meta property="og:description" content="查看系统支持的 shell 与默认的 shell1234docker run -it centos bashdocker ps -adocker start b4809e7f9e71docker exec -it b4809e7f9e71 bash  查看当前系统支持的 shell cat &#x2F;etc&#x2F;shells 1234&#x2F;bin&#x2F;sh&#x2F;bin&#x2F;bash&#x2F;usr&#x2F;bin&#x2F;sh&#x2F;usr&#x2F;bin&#x2F;ba">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-21T09:46:39.000Z">
+<meta property="article:modified_time" content="2022-05-03T07:18:42.772Z">
+<meta property="article:author" content="ThankIT">
+<meta property="article:tag" content="bash shell">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/bash-shell-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Bash Shell 学习笔记 | Thank IT</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Thank IT</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">以应用为导向的个人博客。日拱一卒，功不唐捐，以此共勉。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/bash-shell-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ThankIT">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Thank IT">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Bash Shell 学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-21 17:46:39" itemprop="dateCreated datePublished" datetime="2021-05-21T17:46:39+08:00">2021-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-03 15:18:42" itemprop="dateModified" datetime="2022-05-03T15:18:42+08:00">2022-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="查看系统支持的-shell-与默认的-shell"><a href="#查看系统支持的-shell-与默认的-shell" class="headerlink" title="查看系统支持的 shell 与默认的 shell"></a><a href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81%E7%9A%84-shell-%E4%B8%8E%E9%BB%98%E8%AE%A4%E7%9A%84-shell"></a>查看系统支持的 shell 与默认的 shell</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -it centos bash</span><br><span class="line">docker ps -a</span><br><span class="line">docker start b4809e7f9e71</span><br><span class="line">docker exec -it b4809e7f9e71 bash</span><br></pre></td></tr></table></figure>
+
+<p>查看当前系统支持的 shell <code>cat /etc/shells</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/bin/sh</span><br><span class="line">/bin/bash</span><br><span class="line">/usr/bin/sh</span><br><span class="line">/usr/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>Mac 系统上 <code>cat /etc/shells</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># List of acceptable shells for chpass(1).</span><br><span class="line"># Ftpd will not allow users to connect who are not using</span><br><span class="line"># one of these shells.</span><br><span class="line"></span><br><span class="line">/bin/bash</span><br><span class="line">/bin/csh</span><br><span class="line">/bin/dash</span><br><span class="line">/bin/ksh</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/tcsh</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;bin&#x2F;sh (已经被 &#x2F;bin&#x2F;bash 所取代) &#x2F;bin&#x2F;bash (就是 Linux 默认的 shell) &#x2F;bin&#x2F;ksh (Kornshell 由 AT&amp;T Bell lab. 发展出来的，兼容于 bash) &#x2F;bin&#x2F;tcsh (整合 C Shell ，提供更多的功能) &#x2F;bin&#x2F;csh (已经被 &#x2F;bin&#x2F;tcsh 所取代) &#x2F;bin&#x2F;zsh (基于 ksh 发展出来的，功能更强大的 shell) 查看当前系统的默认 shell <code>echo $SHELL</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;bin&#x2F;bash 是二进制文件 <a target="_blank" rel="noopener" href="https://www.gnu.org/software/bash/">下载 bash 源码</a> <a target="_blank" rel="noopener" href="https://www.baeldung.com/linux/read-source-code-shell-commands">Read the Source Code of Shell Commands</a> <a target="_blank" rel="noopener" href="https://my.oschina.net/sukai/blog/295866">写一个简单的 shell</a></p>
+<h3 id="I-x2F-O-重定向"><a href="#I-x2F-O-重定向" class="headerlink" title="I&#x2F;O 重定向"></a><a href="#i/o-%E9%87%8D%E5%AE%9A%E5%90%91"></a>I&#x2F;O 重定向</h3><h4 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a><a href="#%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"></a>输出重定向</h4><p>我们使用 “&gt;” 重定向符，其后跟着文件名，来重定向标准输出到一个文件而不是屏幕。 为什么我们要这样做呢？因为有时候把一个命令的运行结果存储到一个文件很有用处。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /usr/bin &gt; ls-output.txt</span><br></pre></td></tr></table></figure>
+
+<p>“&gt;” 总是从头开始写文件。所以如果我们需要删除一个文件内容（或者创建一个新的空文件） 就可以用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ls-output.txt</span><br></pre></td></tr></table></figure>
+
+<p>使用 “&gt;&gt;” 操作符，可以将输出结果添加到文件内容之后。如果文件不存在，文件会被创建。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /usr/bin &gt;&gt; ls-output.txt</span><br></pre></td></tr></table></figure>
+
+<p>下面这个命令发生错误时，将会导致 ls-output.txt 被清空，因为标准错误并没有被重定向</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr &gt; ls-output.txt</span><br></pre></td></tr></table></figure>
+
+<p>重定向标准错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr 2&gt; ls-error.txt</span><br></pre></td></tr></table></figure>
+
+<p>文件描述符 “2”，紧挨着放在重定向操作符之前。 文件描述符 0，1 和 2 分别对应标准输入，输出和错误。 一般情况下，每个Linux程序运行时都会创建三个文件流（三个文件）： 标准输入流(stdin)：stdin的文件描述符为0，Linux程序默认从stdin读取数据。 标准输出流(stdout)：stdout 的文件描述符为1，Linux程序默认向stdout输出数据。 标准错误流(stderr)：stderr的文件描述符为2，Linux程序会向stderr流中写入错误信息。 重定向标准输出和错误到同一个文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr &gt; ls-output.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>使用这种方法，我们完成两个重定向。首先重定向标准输出到文件 ls-output.txt，然后重定 向文件描述符 2（标准错误）到文件描述符 1（标准输出）使用表示法 2&gt;&amp;1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr &amp;&gt; ls-output.txt</span><br></pre></td></tr></table></figure>
+
+<p>处理不需要的输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr 2&gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<p>“&#x2F;dev&#x2F;null” 这个文件是系统设备，叫做位存储桶，它可以接受输入，并且对输入不做任何处理。</p>
+<h4 id="输入重定向"><a href="#输入重定向" class="headerlink" title="输入重定向"></a><a href="#%E8%BE%93%E5%85%A5%E9%87%8D%E5%AE%9A%E5%90%91"></a>输入重定向</h4><p><code>wc -l &lt; users</code> 计算 users 文件中的行数，等同于 <code>wc -l users</code></p>
+<h3 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a><a href="#%E7%A7%BB%E5%8A%A8%E5%85%89%E6%A0%87"></a>移动光标</h3><h4 id="命令行中移动光标"><a href="#命令行中移动光标" class="headerlink" title="命令行中移动光标"></a><a href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E7%A7%BB%E5%8A%A8%E5%85%89%E6%A0%87"></a>命令行中移动光标</h4><p>Ctrl + a</p>
+<p>光标移动到行首（Ahead of line）</p>
+<p>Ctrl + e</p>
+<p>光标移动到行尾（End of line）</p>
+<p>Ctrl + f</p>
+<p>光标向前(Forward)移动一个字符位置</p>
+<p>Ctrl + b</p>
+<p>光标往回(Backward)移动一个字符位置</p>
+<p>Alt + f (Mac Fn+option &#x3D; Alt)</p>
+<p>光标向前（Forward）移动到下一个单词</p>
+<p>Alt + b (Mac Fn+option &#x3D; Alt)</p>
+<p>光标往回（Backward）移动到前一个单词</p>
+<p>Ctrl + d</p>
+<p>删除光标所在的一个字符</p>
+<p>Ctrl + h</p>
+<p>退格删除一个字符，相当于通常的Backspace键 H is the ASCII BS (Backspace) character</p>
+<p>Ctrl + l</p>
+<p>清屏，相当于执行clear命令</p>
+<p>Ctrl + U</p>
+<p>剪切光标之前的所有文本。</p>
+<p>Ctrl + K</p>
+<p>剪切光标之后的所有文本。</p>
+<p>Ctrl + W</p>
+<p>剪切光标之前的一个单词。</p>
+<p>Ctrl + Y</p>
+<p>粘贴剪切的内容，与 Ctrl + W和 Ctrl + U配合使用。</p>
+<p><a target="_blank" rel="noopener" href="https://ss64.com/bash/syntax-keyboard.html">Bash Keyboard Shortcuts</a> <a target="_blank" rel="noopener" href="https://fungleo.blog.csdn.net/article/details/78055808">mac 下使用 iTerm 终端工具无法使用 alt+b 和 alt+f 快捷键的解决方法</a></p>
+<h4 id="vi-移动光标"><a href="#vi-移动光标" class="headerlink" title="vi 移动光标"></a><a href="#vi-%E7%A7%BB%E5%8A%A8%E5%85%89%E6%A0%87"></a>vi 移动光标</h4><p>l or 右箭头 向右移动一个字符 h or 左箭头 向左移动一个字符 j or 下箭头 向下移动一行 k or 上箭头 向上移动一行 0 (零按键) 移动到当前行的行首。 ˆ 移动到当前行的第一个非空字符。 $ 移动到当前行的末尾。 w 移动到下一个单词或标点符号的开头。 W 移动到下一个单词的开头，忽略标点符号。 b 移动到上一个单词或标点符号的开头。 B 移动到上一个单词的开头，忽略标点符号。 Ctrl-f or Page Down 向下翻一页 Ctrl-b or Page Up 向上翻一页 numberG 移动到第 number 行。例如，1G 移动到文件的第一行。 G 移动到文件末尾。 vi 中的许多命令都可以在前面加上一个数字，比方说上面提到的 “G” 命令。在命令之前加 上一个数字，我们就可以指定命令执行的次数。例如，命令 “5j” 导致 vi 向下移动 5 行。</p>
+<h3 id="管道线"><a href="#管道线" class="headerlink" title="管道线"></a><a href="#%E7%AE%A1%E9%81%93%E7%BA%BF"></a>管道线</h3><p>有时候，我们可以把两个命令连起来使用，一个命令的输出作为另一个命令的输入，这就叫做管道。为了建立管道，需要在两个命令之间使用竖线()连接。 管道是Linux进程之间一种重要的通信机制；除了管道，还有共享内存、消息队列、信号、套接字(socket) 等进程通信机制。 管道使用竖线()将两个命令隔开，竖线左边命令的输出就会作为竖线右边命令的输入。连续使用竖线表示第一个命令的输出会作为第二个命令的输入，第二个命令的输出又会作为第三个命令的输入，依此类推。</p>
+<h3 id="常用的命令"><a href="#常用的命令" class="headerlink" title="常用的命令"></a><a href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4"></a>常用的命令</h3><h4 id="type"><a href="#type" class="headerlink" title="type"></a><a href="#type"></a>type</h4><p>type - 显示命令的类型 alias：别名。 keyword：关键字，Shell保留字。 function：函数，Shell函数。 builtin：内建命令，Shell内建命令。 file：文件，磁盘文件，外部命令。 unfound：没有找到 <a target="_blank" rel="noopener" href="https://man.linuxde.net/type">https://man.linuxde.net/type</a></p>
+<h4 id="help-amp-man-amp-info-amp-—help"><a href="#help-amp-man-amp-info-amp-—help" class="headerlink" title="help &amp; man &amp; info &amp; —help"></a><a href="#help-&-man-&-info-&---help"></a>help &amp; man &amp; info &amp; —help</h4><p>help - 得到 shell 内部命令的帮助文档 man –显示命令手册页 许多希望被命令行使用的可执行程序，提供了一个正式的文档，叫做手册或手册页 (man page)。一个特殊的叫做 man 的分页程序，可用来浏览他们。 info – 显示程序 Info 条目 同 man 的应用场景一致，但 info 查询所显示的信息比 man 更为完整，它将说明文件数据拆成了一个个段落的形式，每个段落都有自己的页面来撰写，还有超链接可以跳转到各个页面中去，每个页面成为一个 node。这要求目标数据的说明文件必须是以info格式写成的才可以使用info来查询。 许多可执行程序支持一个 “—help” 选项，可以试一试来获得用法信息。</p>
+<h4 id="which-amp-apropos-amp-whatis"><a href="#which-amp-apropos-amp-whatis" class="headerlink" title="which &amp; apropos &amp; whatis"></a><a href="#which-&-apropos-&-whatis"></a>which &amp; apropos &amp; whatis</h4><p>which – 显示一个可执行程序的位置 这个命令只对可执行程序有效，不包括内部命令和命令别名， apropos –显示一系列适合的命令 等同于 man -k whatis –他是一个可执行程序，用来显示一个命令的简洁描述 等同于 man -f</p>
+<h4 id="alias"><a href="#alias" class="headerlink" title="alias"></a><a href="#alias"></a>alias</h4><p>alias –创建命令别名 alias name&#x3D;’command1; command2; command3…’ 删除别名，使用 unalias 命令 unalias name 要查看所有定义在系统环境中的别名，使用不带参数的 alias 命令</p>
+<h4 id="history-amp-Ctrl-r"><a href="#history-amp-Ctrl-r" class="headerlink" title="history &amp; Ctrl + r"></a><a href="#history-&-ctrl-+-r"></a>history &amp; Ctrl + r</h4><p>history 显示历史列表 history less history grep &#x2F;usr&#x2F;bin <code>!88</code> bash 会把 “!88” 展开成为历史列表中 88 行的内容 Ctrl + r 调用历史命令 在 bash 界面，Ctrl + r 后输入你要搜索的字符，然后 Ctrl + r 可以向上翻，如果你想改动的话，可以用 Ctrl + b 等操作来移动(参考命令行中移动光标)，修改，最后按回车 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/bkylee/p/5567679.html">ctrl+r 调用bash曾经的历史命令</a></p>
+<h4 id="less"><a href="#less" class="headerlink" title="less"></a><a href="#less"></a>less</h4><p>less 的用法 less &#x2F;etc&#x2F;passwd history less Page UP or b 向后翻滚一页 Page Down or space 向前翻动一页 UP Arrow 向前移动一行 Down Arrow 向后移动一行 G 移动到最后一行 1G or g 移动到开头一行 &#x2F;charaters 向下查找指定的字符串 ?字符串：向上搜索”字符串”的功能 n 向下查找下一个出现的字符串，这个字符串是之前所指定查找的 N：向上重复前一个搜索（与 &#x2F; 或 ? 有关） h 显示帮助屏幕 q 退出 less 程序</p>
+<h4 id="cat"><a href="#cat" class="headerlink" title="cat"></a><a href="#cat"></a>cat</h4><p>cat 的用法 cat 命令读取一个或多个文件，然后复制它们到标准输出，就像这样: <code>cat ls-output.txt</code>将会显示文件 ls-output.txt 的内容。 cat 经常被用来显示简短的文本文件。因为 cat 可以接受不止一个文件作为参数，所以它也可以用来把文件连接在一起。比方说我们下载了一个大型文件，这个文件被分离成多个部分（USENET 中的多媒体文件经常以这种方式分离），我们想把它们连起来。 <code>cat movie.mpeg.0* &gt; movie.mpeg</code> 如果 cat 没有给出任何参数，它会从标准输入读入数据，因为标准输入，默认情况下，连接到键盘。它正在等待我们输入数据！ 下一步，输入 Ctrl-d（按住 Ctrl 键同时按下 “d”），来告诉 cat，在标准输入中，它已经到达文件末尾（EOF）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; a.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="grep"><a href="#grep" class="headerlink" title="grep"></a><a href="#grep"></a>grep</h4><p>grep －打印匹配行 “global regular expression print” grep [options] regex [file…]</p>
+<p>选项</p>
+<p>描述</p>
+<p>-i</p>
+<p>忽略大小写。不会区分大小写字符。也可用 —ignore-case 来指定。</p>
+<p>-v</p>
+<p>不匹配。通常，grep 程序会打印包含匹配项的文本行。这个选项导致 grep 程序只会不包含匹配项的文本行。也可用 —invert-match 来指定。</p>
+<p>-c</p>
+<p>打印匹配的数量（或者是不匹配的数目，若指定了 -v 选项），而不是文本行本身。也可用 —count 选项来指定。</p>
+<p>-l</p>
+<p>打印包含匹配项的文件名，而不是文本行本身，也可用 —files-with-matches 选项来指定。</p>
+<p>-L</p>
+<p>相似于 -l 选项，但是只是打印不包含匹配项的文件名。也可用 —files-without-match 来指定。</p>
+<p>-n</p>
+<p>在每个匹配行之前打印出其位于文件中的相应行号。也可用 —line-number 选项来指定。</p>
+<p>-h</p>
+<p>应用于多文件搜索，不输出文件名。也可用 —no-filename 选项来指定。</p>
+<p>-r</p>
+<p>表示递归查找</p>
+<p>以递归的方式查找符合条件的文件。例如，查找指定目录&#x2F;etc&#x2F;acpi 及其子目录（如果存在子目录的话）下所有文件中包含字符串”update”的文件，并打印出该字符串所在行的内容，使用的命令为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -r update /etc/acpi</span><br></pre></td></tr></table></figure>
+
+<p>查找 mcom-connector.log 中包含 ‘CTW21’ 字符的行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &#x27;CTW21&#x27; mcom-connector.log</span><br></pre></td></tr></table></figure>
+
+<p>grep 和 find 的区别 grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式进行匹配查找。 find是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间。</p>
+<h4 id="find"><a href="#find" class="headerlink" title="find"></a><a href="#find"></a>find</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -type f -name &quot;xdebug.so&quot;</span><br></pre></td></tr></table></figure>
+
+<p>查找名称为 xdebug.so 的普通文件</p>
+<h4 id="sort"><a href="#sort" class="headerlink" title="sort"></a><a href="#sort"></a>sort</h4><p>sort 的用法 sort testfile 这个 sort 程序对标准输入的内容，或命令行中指定的一个或多个文件进行排序，然后把排序结果发送到标准输出。不改变原文件的内容。 与 cat 类似， sort &gt; foo.txt c b a cat foo.txt a b c 因为 sort 程序能接受命令行中的多个文件作为参数，所以有可能把多个文件合并成一个有序的文件。 例如，如果我们有三个文本文件，想要把它们合并为一个有序的文件，我们可以这 样做： sort file1.txt file2.txt file3.txt &gt; final_sorted_list.txt</p>
+<h4 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a><a href="#xargs"></a>xargs</h4><p><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-xargs.html">https://www.runoob.com/linux/linux-comm-xargs.html</a></p>
+<h4 id="wc"><a href="#wc" class="headerlink" title="wc"></a><a href="#wc"></a>wc</h4><p>wc 计算文件的Byte数、字数、或是列数，若不指定文件名称、或是所给予的文件名为”-“，则wc指令会从标准输入设备读取数据。 $ wc testfile # testfile文件的统计信息 3 92 598 testfile # testfile文件的行数为3、单词数92、字节数598</p>
+<h4 id="touch"><a href="#touch" class="headerlink" title="touch"></a><a href="#touch"></a>touch</h4><p>touch playground&#x2F;timestamp 这个创建了一个空文件，名为 timestamp，并且把它的修改时间设置为当前时间。 我们能够通过使用命令，stat 来验证它，stat 是一款加大马力的 ls 命令版本。这个 stat 命令会展示系统对某个文件及其属性所知道的所有信息</p>
+<h4 id="mv"><a href="#mv" class="headerlink" title="mv"></a><a href="#mv"></a>mv</h4><p>mv 移动和重命名文件 mv 操作文件时是移动并且重命名。 目标目录与原目录一致，指定了新文件名，效果就是仅仅重命名。 mv &#x2F;home&#x2F;ffxhd&#x2F;a.txt &#x2F;home&#x2F;ffxhd&#x2F;b.txt 目标目录与原目录不一致，没有指定新文件名，效果就是仅仅移动。 mv &#x2F;home&#x2F;ffxhd&#x2F;a.txt &#x2F;home&#x2F;ffxhd&#x2F;test&#x2F; 或者 mv &#x2F;home&#x2F;ffxhd&#x2F;a.txt &#x2F;home&#x2F;ffxhd&#x2F;test 目标目录与原目录一致, 指定了新文件名，效果就是：移动 + 重命名。 mv &#x2F;home&#x2F;ffxhd&#x2F;a.txt &#x2F;home&#x2F;ffxhd&#x2F;test&#x2F;c.txt</p>
+<h4 id="cp"><a href="#cp" class="headerlink" title="cp"></a><a href="#cp"></a>cp</h4><p>cp 命令使用 -r 参数可以将 packageA 下的所有文件拷贝到 packageB 中： <code>cp -r /home/packageA/* /home/cp/packageB/</code> 将一个文件夹复制到另一个文件夹下，以下实例 packageA 文件会拷贝到 packageB 中： <code>cp -r /home/packageA /home/packageB</code> 运行命令之后 packageB 文件夹下就有 packageA 文件夹了。</p>
+<h4 id="rm"><a href="#rm" class="headerlink" title="rm"></a><a href="#rm"></a>rm</h4><p>rm [options] name… 参数： -i 删除前逐一询问确认。 -f 即使原档案属性设为唯读，亦直接删除，无需逐一确认。 -r 将目录及以下之档案亦逐一删除。</p>
+<h4 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a><a href="#mkdir"></a>mkdir</h4><p>mkdir [-p] dirName 在工作目录下，建立一个名为 runoob 的子目录 : mkdir runoob 在工作目录下的 runoob2 目录中，建立一个名为 test 的子目录。 若 runoob2 目录原本不存在，则建立一个。（注：本例若不加 -p 参数，且原本 runoob2 目录不存在，则产生错误。）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p runoob2/test</span><br></pre></td></tr></table></figure>
+
+<h4 id="ln"><a href="#ln" class="headerlink" title="ln"></a><a href="#ln"></a>ln</h4><p>ln 软链接： 1.软链接，以路径的形式存在。类似于Windows操作系统中的快捷方式 2.软链接可以跨文件系统 ，硬链接不可以 3.软链接可以对一个不存在的文件名进行链接 4.软链接可以对目录进行链接 硬链接： 1.硬链接，以文件副本的形式存在。但不占用实际空间。 2.不允许给目录创建硬链接 3.硬链接只有在同一个文件系统中才能创建 ln [参数][源文件或目录][目标文件或目录]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln fun fun-hard</span><br><span class="line">ln -s fun fun-sym</span><br></pre></td></tr></table></figure>
+
+<h4 id="head-amp-tail-amp-seq"><a href="#head-amp-tail-amp-seq" class="headerlink" title="head &amp; tail &amp; seq"></a><a href="#head-&-tail-&-seq"></a>head &amp; tail &amp; seq</h4><p>head -n 5 nowcoder.txt 查看前 5 行 tail -n 5 nowcoder.txt 查看最后 5 行 seq 0 7 500 产生 0 到 500 之间每次增加 7 的所有整数</p>
+<h4 id="scp"><a href="#scp" class="headerlink" title="scp"></a><a href="#scp"></a>scp</h4><p>从远程复制到本地 scp {xxx}@{ip}:&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;remote.nginx.conf.common &#x2F;Users&#x2F;local&#x2F;dir&#x2F; <a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-scp.html">Linux scp命令</a></p>
+<h3 id="压缩与打包"><a href="#压缩与打包" class="headerlink" title="压缩与打包"></a><a href="#%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85"></a>压缩与打包</h3><p><em>.gz gzip 程序压缩的文件；</em> .bz2 bzip2 程序压缩的文件； <em>.tar tar 程序打包的数据，并没有压缩过；</em> .tar.gz tar 程序打包的文件，其中并且经过 gzip 的压缩 *.tar.bz2 tar 程序打包的文件，其中并且经过 bzip2 的压缩 gzip file 当你使用 gzip 进行压缩时，在默认的状态下原本的文件会被压缩成为 .gz 的档名， 原始文件就不再存在了。 cat 可以读取纯文字档，那个 zcat 则可以读取纯文字档被压缩后的压缩档 bzip2, bzcat 若说 gzip 是为了取代 compress 并提供更好的压缩比而成立的，那么 bzip2 则是为了取代 gzip 并提供更佳的压缩比而来的。 bzip2 真是很不错的东西 虽然 gzip 与 bzip2 也能够针对目录来进行压缩， 不过，这两个命令对目录的压缩指的是『将目录内的所有文件 “分别” 进行压缩』的动作 tar 压　缩：tar -jcv -f filename.tar.bz2 要被压缩的文件或目录名称 查　询：tar -jtv -f filename.tar.bz2 解压缩：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录 那个 filename.tar.bz2 是我们自己取的档名，tar 并不会主动的产生创建的档名喔！我们要自订啦！ 所以扩展名就显的很重要了！ 如果不加 [-j-z] 的话，档名最好取为 <em>.tar 即可。 如果是 -j 选项，代表有 bzip2 的支持，因此档名最好就取为</em> .tar.bz2 ，因为 bzip2 会产生 .bz2 的扩展名之故！ 至於如果是加上了 -z 的 gzip 的支持，那档名最好取为 *.tar.gz 喔。 另外，由於『 -f filename 』是紧接在一起的，过去很多文章常会写成『-jcvf filename』，这样是对的， 但由於选项的顺序理论上是可以变换的，所以很多读者会误认为『-jvfc filename』也可以～事实上这样会导致产生的档名变成 c ！ 因为 -fc 嘛！所以罗，建议您在学习 tar 时，将『 -f filename 』与其他选项独立出来，会比较不容易发生问题。 『 -p 』这个选项的原因是为了保存原本文件的权限与属性 一般是拿掉根目录的 如果加上 -P 选项，那么档名内的根目录就会存在喔！不过，鸟哥个人建议，还是不要加上 -P 这个选项来备份！ 毕竟很多时候，我们备份是为了要未来追踪问题用的，倒不一定需要还原回原本的系统中！ 所以拿掉根目录后，备份数据的应用会比较有弹性！也比较安全呢！ 摘自鸟哥的 Linux 私房菜<a target="_blank" rel="noopener" href="http://cn.linux.vbird.org/linux_basic/0240tarcompress_3.php">第九章、文件与文件系统的压缩与打包</a></p>
+<h3 id="源文件安装"><a href="#源文件安装" class="headerlink" title="源文件安装"></a><a href="#%E6%BA%90%E6%96%87%E4%BB%B6%E5%AE%89%E8%A3%85"></a>源文件安装</h3><p>大部分的 tarball 软件安装步骤：</p>
+<ol>
+<li><code>./configure</code> 这个步骤就是在创建 Makefile 这个文件罗！通常程序开发者会写一支 scripts 来检查你的 Linux 系统、相关的软件属性等等，这个步骤相当的重要， 因为未来你的安装资讯都是这一步骤内完成的！另外，这个步骤的相关资讯应该要参考一下该目录下的 README 或 INSTALL 相关的文件！</li>
+<li><code>make clean</code> make 会读取 Makefile 中关於 clean 的工作。这个步骤不一定会有，但是希望运行一下，因为他可以去除目标文件！因为谁也不确定原始码里面到底有没有包含上次编译过的目标文件 (*.o) 存在，所以当然还是清除一下比较妥当的。 至少等一下新编译出来的运行档我们可以确定是使用自己的机器所编译完成的嘛！</li>
+<li><code>make</code> make 会依据 Makefile 当中的默认工作进行编译的行为！编译的工作主要是进行 gcc 来将原始码编译成为可以被运行的 object files ，但是这些 object files 通常还需要一些函式库之类的 link 后，才能产生一个完整的运行档！使用 make 就是要将原始码编译成为可以被运行的可运行档，而这个可运行档会放置在目前所在的目录之下， 尚未被安装到预定安装的目录中；</li>
+<li><code>make install</code> 通常这就是最后的安装步骤了，make 会依据 Makefile 这个文件里面关於 install 的项目，将上一个步骤所编译完成的数据给他安装到预定的目录中，就完成安装啦！</li>
+</ol>
+<p>通常我们会建议大家将自己安装的软件放置在 &#x2F;usr&#x2F;local 下，至於原始码 (Tarball)则建议放置在 &#x2F;usr&#x2F;local&#x2F;src (src 为 source 的缩写)底下啊。 我们晓得几乎每个软件都会提供线上说明的服务，那就是 info 与 man 的功能。 最好将 tarball 的原始数据解压缩到 &#x2F;usr&#x2F;local&#x2F;src 当中； 安装时，最好安装到 &#x2F;usr&#x2F;local 这个默认路径下； 考虑未来的反安装步骤，最好可以将每个软件单独的安装在 &#x2F;usr&#x2F;local 底下； 为安装到单独目录的软件之 man page 加入 man path 搜寻： 如果你安装的软件放置到 &#x2F;usr&#x2F;local&#x2F;software&#x2F; ，那么 man page 搜寻的配置中，可能就得要在 &#x2F;etc&#x2F;man.config 内的 40~50 行左右处，写入如下的一行： MANPATH &#x2F;usr&#x2F;local&#x2F;software&#x2F;man 这样才可以使用 man 来查询该软件的线上文件罗！ 摘自鸟哥的 Linux 私房菜<a target="_blank" rel="noopener" href="http://cn.linux.vbird.org/linux_basic/0520source_code_and_tarball_4.php">第二十二章、软件安装：原始码与 Tarball</a></p>
+<h3 id="patch"><a href="#patch" class="headerlink" title="patch"></a><a href="#patch"></a>patch</h3><p>patch -p数字 &lt; patch_file 特别留意那个『 -p数字』，那是与 patch_file 里面列出的档名有关的资讯。假如在 patch_file 第一行写的是这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*** /home/guest/example/expatch.old</span><br></pre></td></tr></table></figure>
+
+<p>那么当我下达『 patch -p0 &lt; patch_file 』时，则升级的文件是『 &#x2F;home&#x2F;guest&#x2F;example&#x2F;expatch.old 』，如果『 patch -p1 &lt; patch_file』，则升级的文件为『home&#x2F;guest&#x2F;example&#x2F;expatch.old』。 如果『patch -p4 &lt; patch_file』则升级『expatch.old』。 也就是说， -pxx 那个 xx 代表『拿掉几个斜线(&#x2F;)』的意思！ 透过『 patch -R &lt; ..&#x2F;main_0.1_to_0.2.patch 』就可以还原啦！很有趣吧！</p>
+<h3 id="md5sum-x2F-sha1sum"><a href="#md5sum-x2F-sha1sum" class="headerlink" title="md5sum &#x2F; sha1sum"></a><a href="#md5sum-/-sha1sum"></a>md5sum &#x2F; sha1sum</h3><p>md5sum &#x2F; sha1sum 计算文件的指纹码 md5sum&#x2F;sha1sum [-bct] filename</p>
+<h3 id="rpm-amp-dpkg"><a href="#rpm-amp-dpkg" class="headerlink" title="rpm &amp; dpkg"></a><a href="#rpm-&-dpkg"></a>rpm &amp; dpkg</h3><p>distribution 代表</p>
+<p>软件管理机制</p>
+<p>使用命令</p>
+<p>线上升级机制(命令)</p>
+<p>Red Hat&#x2F;Fedora</p>
+<p>RPM</p>
+<p>rpm, rpmbuild</p>
+<p>YUM (yum)</p>
+<p>Debian&#x2F;Ubuntu</p>
+<p>DPKG</p>
+<p>dpkg</p>
+<p>APT (apt-get)</p>
+<p>使用dpkg命令进行安装。sudo dpkg -i deb文件名 使用rpm命令进行安装。sudo rpm -i 需要安装的包文件名</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/bash-shell/" rel="tag"># bash shell</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/git-revert-m/" rel="prev" title="用 git revert 撤回 merge 了的 commit">
+      <i class="fa fa-chevron-left"></i> 用 git revert 撤回 merge 了的 commit
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81%E7%9A%84-shell-%E4%B8%8E%E9%BB%98%E8%AE%A4%E7%9A%84-shell"><span class="nav-number">1.</span> <span class="nav-text">查看系统支持的 shell 与默认的 shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-x2F-O-%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">2.</span> <span class="nav-text">I&#x2F;O 重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">2.1.</span> <span class="nav-text">输出重定向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">2.2.</span> <span class="nav-text">输入重定向</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E5%85%89%E6%A0%87"><span class="nav-number">3.</span> <span class="nav-text">移动光标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E7%A7%BB%E5%8A%A8%E5%85%89%E6%A0%87"><span class="nav-number">3.1.</span> <span class="nav-text">命令行中移动光标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vi-%E7%A7%BB%E5%8A%A8%E5%85%89%E6%A0%87"><span class="nav-number">3.2.</span> <span class="nav-text">vi 移动光标</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E9%81%93%E7%BA%BF"><span class="nav-number">4.</span> <span class="nav-text">管道线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">常用的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#type"><span class="nav-number">5.1.</span> <span class="nav-text">type</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#help-amp-man-amp-info-amp-%E2%80%94help"><span class="nav-number">5.2.</span> <span class="nav-text">help &amp; man &amp; info &amp; —help</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#which-amp-apropos-amp-whatis"><span class="nav-number">5.3.</span> <span class="nav-text">which &amp; apropos &amp; whatis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#alias"><span class="nav-number">5.4.</span> <span class="nav-text">alias</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#history-amp-Ctrl-r"><span class="nav-number">5.5.</span> <span class="nav-text">history &amp; Ctrl + r</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#less"><span class="nav-number">5.6.</span> <span class="nav-text">less</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cat"><span class="nav-number">5.7.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#grep"><span class="nav-number">5.8.</span> <span class="nav-text">grep</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#find"><span class="nav-number">5.9.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sort"><span class="nav-number">5.10.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xargs"><span class="nav-number">5.11.</span> <span class="nav-text">xargs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wc"><span class="nav-number">5.12.</span> <span class="nav-text">wc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#touch"><span class="nav-number">5.13.</span> <span class="nav-text">touch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mv"><span class="nav-number">5.14.</span> <span class="nav-text">mv</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cp"><span class="nav-number">5.15.</span> <span class="nav-text">cp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rm"><span class="nav-number">5.16.</span> <span class="nav-text">rm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mkdir"><span class="nav-number">5.17.</span> <span class="nav-text">mkdir</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ln"><span class="nav-number">5.18.</span> <span class="nav-text">ln</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#head-amp-tail-amp-seq"><span class="nav-number">5.19.</span> <span class="nav-text">head &amp; tail &amp; seq</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scp"><span class="nav-number">5.20.</span> <span class="nav-text">scp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85"><span class="nav-number">6.</span> <span class="nav-text">压缩与打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BA%90%E6%96%87%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">7.</span> <span class="nav-text">源文件安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#patch"><span class="nav-number">8.</span> <span class="nav-text">patch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#md5sum-x2F-sha1sum"><span class="nav-number">9.</span> <span class="nav-text">md5sum &#x2F; sha1sum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpm-amp-dpkg"><span class="nav-number">10.</span> <span class="nav-text">rpm &amp; dpkg</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ThankIT</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ThankIT</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
