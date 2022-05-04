@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="应用场景当我们开发完某项功能，合并到 develop 分支后，其他人又提交了他们的代码。本来准备要上线了，这时由于某些原因，项目经理表示要撤回我们提交的代码，这个功能这次不上线了。这时候 git revert 就派上用场啦。 准备工作我们来创建一个提交历史做实验。 首先创建一个 repo 123mkdir git-revert-merge-commitcd git-revert-merge-com">
+  <meta name="description" content="应用场景 当我们开发完某项功能，合并到 develop 分支后，其他人又提交了他们的代码。本来准备要上线了，这时由于某些原因，项目经理表示要撤回我们提交的代码，这个功能这次不上线了。这时候 git revert 就派上用场啦。  准备工作 我们来创建一个提交历史做实验。 首先创建一个 repo  1 2 3   mkdir git-revert-merge-commit cd git-revert">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用 git revert 撤回 merge 了的 commit">
 <meta property="og:url" content="http://example.com/git-revert-m/index.html">
 <meta property="og:site_name" content="Thank IT">
-<meta property="og:description" content="应用场景当我们开发完某项功能，合并到 develop 分支后，其他人又提交了他们的代码。本来准备要上线了，这时由于某些原因，项目经理表示要撤回我们提交的代码，这个功能这次不上线了。这时候 git revert 就派上用场啦。 准备工作我们来创建一个提交历史做实验。 首先创建一个 repo 123mkdir git-revert-merge-commitcd git-revert-merge-com">
+<meta property="og:description" content="应用场景 当我们开发完某项功能，合并到 develop 分支后，其他人又提交了他们的代码。本来准备要上线了，这时由于某些原因，项目经理表示要撤回我们提交的代码，这个功能这次不上线了。这时候 git revert 就派上用场啦。  准备工作 我们来创建一个提交历史做实验。 首先创建一个 repo  1 2 3   mkdir git-revert-merge-commit cd git-revert">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/wp-content/uploads/2021/01/git_history.png">
 <meta property="og:image" content="http://example.com/wp-content/uploads/2021/01/git_revert_failed.png">
